@@ -28,4 +28,7 @@ public class Movie {
             joinColumns = {@JoinColumn(name = "movie_id")},
             inverseJoinColumns = {@JoinColumn(name = "character_id")})
     private Set<Character> characters;
+
+    @ManyToOne
+    private Franchise franchise;
 }

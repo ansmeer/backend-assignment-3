@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Entity
 @NoArgsConstructor
 @Data
@@ -14,4 +16,7 @@ public class Franchise {
     @Column(nullable = false)
     private String name;
     private String description;
+
+    @OneToMany(mappedBy = "franchise")
+    private Set<Movie> movies;
 }
