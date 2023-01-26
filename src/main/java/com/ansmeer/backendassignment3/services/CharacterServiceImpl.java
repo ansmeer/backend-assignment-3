@@ -8,33 +8,44 @@ import java.util.Collection;
 
 @Service
 public class CharacterServiceImpl implements CharacterService {
+    private final CharacterRepository characterRepository;
+
+    public CharacterServiceImpl(CharacterRepository characterRepository) {
+        this.characterRepository = characterRepository;
+    }
+
+
     @Override
-    public Character findById(Integer integer) {
-        return null;
+    public Character findById(Integer id) {
+        return characterRepository.findById(id).orElseThrow();
     }
 
     @Override
     public Collection<Character> findAll() {
-        return null;
+        return characterRepository.findAll();
     }
 
     @Override
-    public Character add(Character entity) {
-        return null;
+    public Character add(Character character) {
+        return characterRepository.save(character);
     }
 
     @Override
-    public Character update(Character entity) {
-        return null;
+    public Character update(Character character) {
+        return characterRepository.save(character);
     }
 
     @Override
-    public int deleteById(Integer integer) {
+    public int deleteById(Integer id) {
+        if (characterRepository.existsById(id)) {
+            characterRepository.deleteById(id);
+            return 1;
+        }
         return 0;
     }
 
     @Override
-    public int delete(Character entity) {
-        return 0;
+    public int delete(Character character) {
+        return deleteById(character.getId());
     }
 }
