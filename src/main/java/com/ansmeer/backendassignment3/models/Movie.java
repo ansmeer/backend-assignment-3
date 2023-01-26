@@ -4,9 +4,12 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Entity
 @NoArgsConstructor
-@Data public class Movie {
+@Data
+public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -17,4 +20,12 @@ import lombok.NoArgsConstructor;
     private String director;
     private String pictureUrl;
     private String trailerUrl;
+
+    // Relationships
+    @ManyToMany
+    @JoinTable(
+            name = "movie_character",
+            joinColumns = {@JoinColumn(name = "movie_id")},
+            inverseJoinColumns = {@JoinColumn(name = "character_id")})
+    private Set<Character> characters;
 }

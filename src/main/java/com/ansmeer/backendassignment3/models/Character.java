@@ -1,11 +1,15 @@
 package com.ansmeer.backendassignment3.models;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
-@Data public class Character {
+@Data
+public class Character {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -14,4 +18,8 @@ import lombok.*;
     private String alias;
     private String gender;
     private String pictureUrl;
+
+    // Relationships
+    @ManyToMany(mappedBy = "characters")
+    private Set<Movie> movies;
 }
