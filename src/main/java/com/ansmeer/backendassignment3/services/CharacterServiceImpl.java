@@ -1,5 +1,7 @@
 package com.ansmeer.backendassignment3.services;
 
+import com.ansmeer.backendassignment3.models.Character;
+import com.ansmeer.backendassignment3.repositories.CharacterRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
