@@ -3,6 +3,7 @@ package com.ansmeer.backendassignment3.services.franchise;
 import com.ansmeer.backendassignment3.exceptions.ElementNotFoundException;
 import com.ansmeer.backendassignment3.models.Franchise;
 import com.ansmeer.backendassignment3.repositories.FranchiseRepository;
+import com.ansmeer.backendassignment3.repositories.MovieRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,9 +12,11 @@ import java.util.List;
 public class FranchiseServiceImpl implements FranchiseService {
 
     private final FranchiseRepository repository;
+    private final MovieRepository movieRepository;
 
-    public FranchiseServiceImpl(FranchiseRepository repository) {
+    public FranchiseServiceImpl(FranchiseRepository repository, MovieRepository movieRepository) {
         this.repository = repository;
+        this.movieRepository = movieRepository;
     }
 
     @Override
@@ -39,8 +42,11 @@ public class FranchiseServiceImpl implements FranchiseService {
 
     @Override
     public int deleteById(Integer id) {
-        //TODO: set franchise_id to null for movies
         if (repository.existsById(id)) {
+            movieRepository.findByFranchiseId(id).forEach(movie -> {
+                movie.setFranchise(null);
+                movieRepository.save(movie);
+            });
             repository.deleteById(id);
             return 1;
         }
