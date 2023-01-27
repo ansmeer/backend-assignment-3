@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
     List<Movie> findByFranchiseId(int id);
+
+    boolean existsById(int id);
 }
