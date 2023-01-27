@@ -1,5 +1,6 @@
 package com.ansmeer.backendassignment3.services;
 
+import com.ansmeer.backendassignment3.exceptions.ElementNotFoundException;
 import com.ansmeer.backendassignment3.models.Character;
 import com.ansmeer.backendassignment3.repositories.CharacterRepository;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,8 @@ public class CharacterServiceImpl implements CharacterService {
 
     @Override
     public Character findById(Integer id) {
-        return repository.findById(id).orElseThrow();
+        return repository.findById(id).orElseThrow(()
+                -> new ElementNotFoundException(id, "character"));
     }
 
     @Override

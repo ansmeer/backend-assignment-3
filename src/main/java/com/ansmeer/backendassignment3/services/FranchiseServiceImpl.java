@@ -1,5 +1,6 @@
 package com.ansmeer.backendassignment3.services;
 
+import com.ansmeer.backendassignment3.exceptions.ElementNotFoundException;
 import com.ansmeer.backendassignment3.models.Franchise;
 import com.ansmeer.backendassignment3.repositories.FranchiseRepository;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,8 @@ public class FranchiseServiceImpl implements FranchiseService {
 
     @Override
     public Franchise findById(Integer id) {
-        return repository.findById(id).orElseThrow();
+        return repository.findById(id).orElseThrow(()
+                -> new ElementNotFoundException(id, "franchise"));
     }
 
     @Override

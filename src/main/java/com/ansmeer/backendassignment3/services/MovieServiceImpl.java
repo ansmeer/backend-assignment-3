@@ -1,5 +1,6 @@
 package com.ansmeer.backendassignment3.services;
 
+import com.ansmeer.backendassignment3.exceptions.ElementNotFoundException;
 import com.ansmeer.backendassignment3.models.Movie;
 import com.ansmeer.backendassignment3.repositories.MovieRepository;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,8 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie findById(Integer id) {
-        return repository.findById(id).orElseThrow();
+        return repository.findById(id).orElseThrow(()
+                -> new ElementNotFoundException(id, "movie"));
     }
 
     @Override
