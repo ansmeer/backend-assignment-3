@@ -4,7 +4,7 @@ import com.ansmeer.backendassignment3.models.Franchise;
 import com.ansmeer.backendassignment3.repositories.FranchiseRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
+import java.util.List;
 
 @Service
 public class FranchiseServiceImpl implements FranchiseService {
@@ -21,7 +21,7 @@ public class FranchiseServiceImpl implements FranchiseService {
     }
 
     @Override
-    public Collection<Franchise> findAll() {
+    public List<Franchise> findAll() {
         return repository.findAll();
     }
 

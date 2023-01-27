@@ -1,11 +1,11 @@
 package com.ansmeer.backendassignment3.services;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface CrudService<T, ID> {
     T findById(ID id);
 
-    Collection<T> findAll();
+    List<T> findAll();
 
     T add(T entity);
 

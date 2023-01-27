@@ -4,7 +4,7 @@ import com.ansmeer.backendassignment3.models.Movie;
 import com.ansmeer.backendassignment3.repositories.MovieRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
+import java.util.List;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -20,7 +20,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Collection<Movie> findAll() {
+    public List<Movie> findAll() {
         return repository.findAll();
     }
 

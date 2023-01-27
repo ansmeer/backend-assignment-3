@@ -4,7 +4,7 @@ import com.ansmeer.backendassignment3.models.Character;
 import com.ansmeer.backendassignment3.repositories.CharacterRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
+import java.util.List;
 
 @Service
 public class CharacterServiceImpl implements CharacterService {
@@ -21,7 +21,7 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
-    public Collection<Character> findAll() {
+    public List<Character> findAll() {
         return characterRepository.findAll();
     }
 
