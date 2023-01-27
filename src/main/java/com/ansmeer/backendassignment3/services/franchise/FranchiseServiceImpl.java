@@ -1,4 +1,4 @@
-package com.ansmeer.backendassignment3.services;
+package com.ansmeer.backendassignment3.services.franchise;
 
 import com.ansmeer.backendassignment3.exceptions.ElementNotFoundException;
 import com.ansmeer.backendassignment3.models.Franchise;
