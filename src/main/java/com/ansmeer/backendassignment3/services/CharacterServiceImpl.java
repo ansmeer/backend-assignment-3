@@ -8,37 +8,37 @@ import java.util.List;
 
 @Service
 public class CharacterServiceImpl implements CharacterService {
-    private final CharacterRepository characterRepository;
+    private final CharacterRepository repository;
 
-    public CharacterServiceImpl(CharacterRepository characterRepository) {
-        this.characterRepository = characterRepository;
+    public CharacterServiceImpl(CharacterRepository repository) {
+        this.repository = repository;
     }
 
 
     @Override
     public Character findById(Integer id) {
-        return characterRepository.findById(id).orElseThrow();
+        return repository.findById(id).orElseThrow();
     }
 
     @Override
     public List<Character> findAll() {
-        return characterRepository.findAll();
+        return repository.findAll();
     }
 
     @Override
     public Character add(Character character) {
-        return characterRepository.save(character);
+        return repository.save(character);
     }
 
     @Override
     public Character update(Character character) {
-        return characterRepository.save(character);
+        return repository.save(character);
     }
 
     @Override
     public int deleteById(Integer id) {
-        if (characterRepository.existsById(id)) {
-            characterRepository.deleteById(id);
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
             return 1;
         }
         return 0;
