@@ -3,6 +3,7 @@ package com.ansmeer.backendassignment3.services.character;
 import com.ansmeer.backendassignment3.exceptions.ElementNotFoundException;
 import com.ansmeer.backendassignment3.models.Character;
 import com.ansmeer.backendassignment3.repositories.CharacterRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,12 +16,17 @@ public class CharacterServiceImpl implements CharacterService {
         this.repository = repository;
     }
 
-
     @Override
     public Character findById(Integer id) {
         return repository.findById(id).orElseThrow(()
                 -> new ElementNotFoundException(id, "character"));
     }
+
+    @Override
+    public boolean existsById(int id) {
+        return repository.existsById(id);
+    }
+
 
     @Override
     public List<Character> findAll() {
@@ -37,9 +43,11 @@ public class CharacterServiceImpl implements CharacterService {
         return repository.save(character);
     }
 
+    @Transactional
     @Override
     public int deleteById(Integer id) {
         if (repository.existsById(id)) {
+            repository.deleteMovieCharacterEntries(id);
             repository.deleteById(id);
             return 1;
         }
