@@ -38,6 +38,15 @@ public class FranchiseController {
                 ));
     }
 
+    @GetMapping("/{id}/movies")
+    public ResponseEntity getMovies(@PathVariable int id) {
+        return ResponseEntity.ok(
+                franchiseMapper.franchiseToFranchiseGetMoviesDto(
+                        franchiseService.findById(id)
+                )
+        );
+    }
+
     @PostMapping
     public ResponseEntity add(@RequestBody FranchisePostDTO franchise) {
         Franchise newFranchise = franchiseService.add(
