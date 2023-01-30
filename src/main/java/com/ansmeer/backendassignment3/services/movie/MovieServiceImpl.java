@@ -38,11 +38,11 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public int deleteById(Integer id) {
-        if (repository.existsById(id)) {
-            repository.deleteById(id);
-            return 1;
+        if (!repository.existsById(id)) {
+            return 0;
         }
-        return 0;
+        repository.deleteById(id);
+        return 1;
     }
 
     @Override
