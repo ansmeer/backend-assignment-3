@@ -5,4 +5,6 @@ import com.ansmeer.backendassignment3.services.CrudService;
 
 public interface MovieService extends CrudService<Movie, Integer> {
     boolean existsById(int id);
+
+    int updateFranchise(int movieId, int franchiseId);
 }

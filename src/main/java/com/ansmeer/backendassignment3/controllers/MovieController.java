@@ -64,6 +64,12 @@ public class MovieController {
         return null;
     }
 
+    @PutMapping("/{id}/franchise")
+    public ResponseEntity updateFranchise(@PathVariable int id, @RequestBody int franchise) {
+        movieService.updateFranchise(id, franchise);
+        return ResponseEntity.noContent().build();
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable int id) {
         if (!movieService.existsById(id)) {
