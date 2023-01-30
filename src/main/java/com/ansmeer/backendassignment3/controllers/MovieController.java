@@ -40,6 +40,7 @@ public class MovieController {
 
     @GetMapping("/{id}/characters")
     public ResponseEntity getCharacters(@PathVariable int id) {
+        // TODO
         Movie movie = movieService.findById(id);
         return ResponseEntity.ok(movie.getCharacters());
     }

@@ -47,6 +47,12 @@ public class FranchiseController {
         );
     }
 
+    @GetMapping("/{id}/characters")
+    public ResponseEntity getCharacters(@PathVariable int id) {
+        // TODO
+        return null;
+    }
+
     @PostMapping
     public ResponseEntity add(@RequestBody FranchisePostDTO franchise) {
         Franchise newFranchise = franchiseService.add(
@@ -62,6 +68,12 @@ public class FranchiseController {
         franchiseService.update(
                 franchiseMapper.franchisePutDtoToFranchise(franchise));
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}/movies")
+    public ResponseEntity updateMovies(@PathVariable int id, @RequestBody int[] movies) {
+        // TODO fix with DTOs
+        return null;
     }
 
     @DeleteMapping("/{id}")
