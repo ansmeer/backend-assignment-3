@@ -2,6 +2,8 @@ package com.ansmeer.backendassignment3.controllers;
 
 import com.ansmeer.backendassignment3.mappers.MovieMapper;
 import com.ansmeer.backendassignment3.models.Movie;
+import com.ansmeer.backendassignment3.models.dtos.movie.MoviePostDTO;
+import com.ansmeer.backendassignment3.models.dtos.movie.MoviePutDTO;
 import com.ansmeer.backendassignment3.services.movie.MovieService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,18 +45,21 @@ public class MovieController {
     }
 
     @PostMapping
-    public ResponseEntity add(@RequestBody Movie movie) throws URISyntaxException {
-        Movie newMovie = movieService.add(movie);
+    public ResponseEntity add(@RequestBody MoviePostDTO movie) throws URISyntaxException {
+        Movie newMovie = movieService.add(
+                movieMapper.moviePostDtoToMovie(movie));
         URI uri = new URI("api/v1/movies/" + newMovie.getId());
         return ResponseEntity.created(uri).build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity update(@PathVariable int id, @RequestBody Movie movie) {
+    public ResponseEntity update(@PathVariable int id, @RequestBody MoviePutDTO movie) {
         if (id != movie.getId()) {
             return ResponseEntity.badRequest().build();
         }
-        movieService.update(movie);
+        movieService.update(
+                movieMapper.moviePutDtoToMovie(movie)
+        );
         return ResponseEntity.noContent().build();
     }
 

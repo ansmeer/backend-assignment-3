@@ -2,6 +2,8 @@ package com.ansmeer.backendassignment3.mappers;
 
 import com.ansmeer.backendassignment3.models.Movie;
 import com.ansmeer.backendassignment3.models.dtos.movie.MovieGetDTO;
+import com.ansmeer.backendassignment3.models.dtos.movie.MoviePostDTO;
+import com.ansmeer.backendassignment3.models.dtos.movie.MoviePutDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -13,4 +15,8 @@ public interface MovieMapper {
     MovieGetDTO movieToMovieGetDto(Movie movie);
 
     List<MovieGetDTO> movieToMovieGetDto(List<Movie> movies);
+
+    Movie moviePostDtoToMovie(MoviePostDTO movie);
+
+    Movie moviePutDtoToMovie(MoviePutDTO movie);
 }
