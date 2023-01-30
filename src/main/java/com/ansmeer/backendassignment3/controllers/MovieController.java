@@ -77,9 +77,6 @@ public class MovieController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable int id) {
-        if (!movieService.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
         movieService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
