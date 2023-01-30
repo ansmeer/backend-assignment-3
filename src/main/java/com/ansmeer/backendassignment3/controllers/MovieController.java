@@ -1,5 +1,6 @@
 package com.ansmeer.backendassignment3.controllers;
 
+import com.ansmeer.backendassignment3.mappers.MovieMapper;
 import com.ansmeer.backendassignment3.models.Movie;
 import com.ansmeer.backendassignment3.services.movie.MovieService;
 import org.springframework.http.ResponseEntity;
@@ -12,19 +13,27 @@ import java.net.URISyntaxException;
 @RequestMapping("api/v1/movies")
 public class MovieController {
     private final MovieService movieService;
+    private final MovieMapper movieMapper;
 
-    public MovieController(MovieService movieService) {
+    public MovieController(MovieService movieService, MovieMapper movieMapper) {
         this.movieService = movieService;
+        this.movieMapper = movieMapper;
     }
 
     @GetMapping
     public ResponseEntity getAll() {
-        return ResponseEntity.ok(movieService.findAll());
+        return ResponseEntity.ok(
+                movieMapper.movieToMovieGetDto(
+                        movieService.findAll())
+        );
     }
 
     @GetMapping("/{id}")
     public ResponseEntity getById(@PathVariable int id) {
-        return ResponseEntity.ok(movieService.findById(id));
+        return ResponseEntity.ok(
+                movieMapper.movieToMovieGetDto(
+                        movieService.findById(id)
+                ));
     }
 
     @GetMapping("/{id}/characters")
