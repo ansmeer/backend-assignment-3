@@ -45,17 +45,14 @@ public class CharacterServiceImpl implements CharacterService {
 
     @Transactional
     @Override
-    public int deleteById(Integer id) {
-        if (!repository.existsById(id)) {
-            return 0;
-        }
+    public void deleteById(Integer id) {
+        if (!repository.existsById(id)) throw new ElementNotFoundException(id, "character");
         repository.deleteMovieCharacterEntries(id);
         repository.deleteById(id);
-        return 1;
     }
 
     @Override
-    public int delete(Character character) {
-        return deleteById(character.getId());
+    public void delete(Character character) {
+        deleteById(character.getId());
     }
 }

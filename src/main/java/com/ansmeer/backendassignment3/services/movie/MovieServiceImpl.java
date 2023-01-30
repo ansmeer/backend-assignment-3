@@ -37,17 +37,14 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public int deleteById(Integer id) {
-        if (!repository.existsById(id)) {
-            return 0;
-        }
+    public void deleteById(Integer id) {
+        if (!repository.existsById(id)) throw new ElementNotFoundException(id, "movie");
         repository.deleteById(id);
-        return 1;
     }
 
     @Override
-    public int delete(Movie movie) {
-        return deleteById(movie.getId());
+    public void delete(Movie movie) {
+        deleteById(movie.getId());
     }
 
     @Override

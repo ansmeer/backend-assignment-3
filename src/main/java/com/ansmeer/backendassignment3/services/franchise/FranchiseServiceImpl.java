@@ -41,21 +41,19 @@ public class FranchiseServiceImpl implements FranchiseService {
     }
 
     @Override
-    public int deleteById(Integer id) {
-        if (!repository.existsById(id)) {
-            return 0;
-        }
+    public void deleteById(Integer id) {
+        if (!repository.existsById(id)) throw new ElementNotFoundException(id, "franchise");
+
         movieRepository.findByFranchiseId(id).forEach(movie -> {
             movie.setFranchise(null);
             movieRepository.save(movie);
         });
         repository.deleteById(id);
-        return 1;
     }
 
     @Override
-    public int delete(Franchise franchise) {
-        return deleteById(franchise.getId());
+    public void delete(Franchise franchise) {
+        deleteById(franchise.getId());
     }
 
     @Override
