@@ -1,5 +1,6 @@
 package com.ansmeer.backendassignment3.controllers;
 
+import com.ansmeer.backendassignment3.mappers.CharacterMapper;
 import com.ansmeer.backendassignment3.models.Character;
 import com.ansmeer.backendassignment3.services.character.CharacterService;
 import org.springframework.http.ResponseEntity;
@@ -12,19 +13,26 @@ import java.net.URI;
 public class CharacterController {
 
     private final CharacterService characterService;
+    private final CharacterMapper characterMapper;
 
-    public CharacterController(CharacterService characterService) {
+    public CharacterController(CharacterService characterService, CharacterMapper characterMapper) {
         this.characterService = characterService;
+        this.characterMapper = characterMapper;
     }
 
     @GetMapping("/{id}")
     public ResponseEntity getById(@PathVariable Integer id) {
-        return ResponseEntity.ok(characterService.findById(id));
+        return ResponseEntity.ok(
+                characterMapper.characterToCharacterDTO(
+                        characterService.findById(id)));
     }
 
     @GetMapping
     public ResponseEntity getAll() {
-        return ResponseEntity.ok(characterService.findAll());
+        return ResponseEntity.ok(
+                characterMapper.characterToCharacterDTO(
+                        characterService.findAll())
+        );
     }
 
     @PostMapping
