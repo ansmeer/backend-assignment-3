@@ -1,7 +1,9 @@
 package com.ansmeer.backendassignment3.services.franchise;
 
 import com.ansmeer.backendassignment3.exceptions.ElementNotFoundException;
+import com.ansmeer.backendassignment3.models.Character;
 import com.ansmeer.backendassignment3.models.Franchise;
+import com.ansmeer.backendassignment3.repositories.CharacterRepository;
 import com.ansmeer.backendassignment3.repositories.FranchiseRepository;
 import com.ansmeer.backendassignment3.repositories.MovieRepository;
 import org.springframework.stereotype.Service;
@@ -14,10 +16,14 @@ public class FranchiseServiceImpl implements FranchiseService {
 
     private final FranchiseRepository repository;
     private final MovieRepository movieRepository;
+    private final CharacterRepository characterRepository;
 
-    public FranchiseServiceImpl(FranchiseRepository repository, MovieRepository movieRepository) {
+    public FranchiseServiceImpl(FranchiseRepository repository,
+                                MovieRepository movieRepository,
+                                CharacterRepository characterRepository) {
         this.repository = repository;
         this.movieRepository = movieRepository;
+        this.characterRepository = characterRepository;
     }
 
     @Override
@@ -71,5 +77,11 @@ public class FranchiseServiceImpl implements FranchiseService {
             if (!movieRepository.existsById(movie)) throw new ElementNotFoundException(movie, "movie");
             movieRepository.updateFranchise(movie, franchiseId);
         }
+    }
+
+    @Override
+    public List<Character> getCharacters(int id) {
+        if (!repository.existsById(id)) throw new ElementNotFoundException(id, "franchise");
+        return characterRepository.findByFranchiseId(id);
     }
 }

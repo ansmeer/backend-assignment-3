@@ -1,5 +1,6 @@
 package com.ansmeer.backendassignment3.controllers;
 
+import com.ansmeer.backendassignment3.mappers.CharacterMapper;
 import com.ansmeer.backendassignment3.mappers.FranchiseMapper;
 import com.ansmeer.backendassignment3.models.Franchise;
 import com.ansmeer.backendassignment3.models.dtos.franchise.FranchiseGetDTO;
@@ -19,10 +20,14 @@ public class FranchiseController {
 
     private final FranchiseService franchiseService;
     private final FranchiseMapper franchiseMapper;
+    private final CharacterMapper characterMapper;
 
-    public FranchiseController(FranchiseService franchiseService, FranchiseMapper franchiseMapper) {
+    public FranchiseController(FranchiseService franchiseService,
+                               FranchiseMapper franchiseMapper,
+                               CharacterMapper characterMapper) {
         this.franchiseService = franchiseService;
         this.franchiseMapper = franchiseMapper;
+        this.characterMapper = characterMapper;
     }
 
     @GetMapping("/{id}")
@@ -52,8 +57,10 @@ public class FranchiseController {
 
     @GetMapping("/{id}/characters")
     public ResponseEntity getCharacters(@PathVariable int id) {
-        // TODO
-        return null;
+        return ResponseEntity.ok(
+                characterMapper.characterToCharacterSummaryDto(
+                        franchiseService.getCharacters(id)
+                ));
     }
 
     @PostMapping
