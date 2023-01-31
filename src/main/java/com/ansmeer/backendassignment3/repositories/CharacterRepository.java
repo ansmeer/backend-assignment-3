@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CharacterRepository extends JpaRepository<Character, Integer> {
-    //TODO: Modifying?
     @Modifying
     @Query(value = "delete from movie_character where character_id = ?1", nativeQuery = true)
     void deleteMovieCharacterEntries(int id);
