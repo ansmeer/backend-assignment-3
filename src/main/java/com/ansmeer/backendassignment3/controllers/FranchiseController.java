@@ -58,7 +58,7 @@ public class FranchiseController {
     @GetMapping("/{id}/characters")
     public ResponseEntity getCharacters(@PathVariable int id) {
         return ResponseEntity.ok(
-                characterMapper.characterToCharacterSummaryDto(
+                characterMapper.characterToCharacterGetSummaryDto(
                         franchiseService.getCharacters(id)
                 ));
     }

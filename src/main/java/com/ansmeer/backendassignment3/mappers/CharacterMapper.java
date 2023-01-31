@@ -15,9 +15,9 @@ public interface CharacterMapper {
 
     List<CharacterGetDTO> characterToCharacterDto(List<Character> characters);
 
-    CharacterGetSummaryDTO characterToCharacterSummaryDto(Character character);
+    CharacterGetSummaryDTO characterToCharacterGetSummaryDto(Character character);
 
-    List<CharacterGetSummaryDTO> characterToCharacterSummaryDto(List<Character> characters);
+    List<CharacterGetSummaryDTO> characterToCharacterGetSummaryDto(List<Character> characters);
 
     Character characterPostDtoToCharacter(CharacterPostDTO character);
 
