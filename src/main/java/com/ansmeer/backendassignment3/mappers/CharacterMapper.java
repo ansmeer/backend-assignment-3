@@ -8,6 +8,7 @@ import com.ansmeer.backendassignment3.models.dtos.character.CharacterPutDTO;
 import org.mapstruct.Mapper;
 
 import java.util.List;
+import java.util.Set;
 
 @Mapper(componentModel = "spring")
 public interface CharacterMapper {
@@ -18,6 +19,8 @@ public interface CharacterMapper {
     CharacterGetSummaryDTO characterToCharacterGetSummaryDto(Character character);
 
     List<CharacterGetSummaryDTO> characterToCharacterGetSummaryDto(List<Character> characters);
+
+    Set<CharacterGetSummaryDTO> characterToCharacterGetSummaryDto(Set<Character> characters);
 
     Character characterPostDtoToCharacter(CharacterPostDTO character);
 

@@ -1,8 +1,9 @@
 package com.ansmeer.backendassignment3.controllers;
 
+import com.ansmeer.backendassignment3.mappers.CharacterMapper;
 import com.ansmeer.backendassignment3.mappers.MovieMapper;
 import com.ansmeer.backendassignment3.models.Movie;
-import com.ansmeer.backendassignment3.models.dtos.movie.MovieGetCharactersDTO;
+import com.ansmeer.backendassignment3.models.dtos.character.CharacterGetSummaryDTO;
 import com.ansmeer.backendassignment3.models.dtos.movie.MovieGetDTO;
 import com.ansmeer.backendassignment3.models.dtos.movie.MoviePostDTO;
 import com.ansmeer.backendassignment3.models.dtos.movie.MoviePutDTO;
@@ -13,16 +14,21 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("api/v1/movies")
 public class MovieController {
     private final MovieService movieService;
     private final MovieMapper movieMapper;
+    private final CharacterMapper characterMapper;
 
-    public MovieController(MovieService movieService, MovieMapper movieMapper) {
+    public MovieController(MovieService movieService,
+                           MovieMapper movieMapper,
+                           CharacterMapper characterMapper) {
         this.movieService = movieService;
         this.movieMapper = movieMapper;
+        this.characterMapper = characterMapper;
     }
 
     @GetMapping
@@ -42,12 +48,11 @@ public class MovieController {
     }
 
     @GetMapping("/{id}/characters")
-    public ResponseEntity<MovieGetCharactersDTO> getCharacters(@PathVariable int id) {
+    public ResponseEntity<Set<CharacterGetSummaryDTO>> getCharacters(@PathVariable int id) {
         return ResponseEntity.ok(
-                movieMapper.movieToMovieGetCharactersDto(
-                        movieService.findById(id)
-                )
-        );
+                characterMapper.characterToCharacterGetSummaryDto(
+                        movieService.findById(id).getCharacters()
+                ));
     }
 
     @PostMapping
