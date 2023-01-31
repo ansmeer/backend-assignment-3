@@ -44,7 +44,6 @@ public class CharacterController {
     public ResponseEntity<Object> add(@RequestBody CharacterPostDTO character) throws URISyntaxException {
         Character newCharacter = characterService.add(
                 characterMapper.characterPostDtoToCharacter(character));
-        //URI uri = URI.create("api/v1/characters/" + newCharacter.getId());
         URI uri = new URI("api/v1/characters/" + newCharacter.getId());
         return ResponseEntity.created(uri).build();
     }
