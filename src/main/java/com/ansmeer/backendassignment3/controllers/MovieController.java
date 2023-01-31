@@ -70,9 +70,9 @@ public class MovieController {
     }
 
     @PutMapping("/{id}/characters")
-    public ResponseEntity updateCharacters(@PathVariable int id, @RequestBody int[] characters) {
-        // TODO fix with DTOs
-        return null;
+    public ResponseEntity<Object> updateCharacters(@PathVariable int id, @RequestBody int[] characters) {
+        movieService.updateCharacters(id, characters);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}/franchise")
