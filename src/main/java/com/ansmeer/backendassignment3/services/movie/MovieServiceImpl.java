@@ -41,8 +41,8 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Movie update(Movie movie) {
-        return repository.save(movie);
+    public void update(Movie movie) {
+        repository.save(movie);
     }
 
     @Override
@@ -54,11 +54,6 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public void delete(Movie movie) {
         deleteById(movie.getId());
-    }
-
-    @Override
-    public boolean existsById(int id) {
-        return repository.existsById(id);
     }
 
     @Override

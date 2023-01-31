@@ -23,12 +23,6 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
-    public boolean existsById(int id) {
-        return repository.existsById(id);
-    }
-
-
-    @Override
     public List<Character> findAll() {
         return repository.findAll();
     }
@@ -39,8 +33,8 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
-    public Character update(Character character) {
-        return repository.save(character);
+    public void update(Character character) {
+        repository.save(character);
     }
 
     @Transactional

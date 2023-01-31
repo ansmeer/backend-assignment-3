@@ -43,8 +43,8 @@ public class FranchiseServiceImpl implements FranchiseService {
     }
 
     @Override
-    public Franchise update(Franchise franchise) {
-        return repository.save(franchise);
+    public void update(Franchise franchise) {
+        repository.save(franchise);
     }
 
     @Override
@@ -62,12 +62,6 @@ public class FranchiseServiceImpl implements FranchiseService {
     public void delete(Franchise franchise) {
         deleteById(franchise.getId());
     }
-
-    @Override
-    public boolean existsById(int id) {
-        return repository.existsById(id);
-    }
-
 
     @Override
     @Transactional
