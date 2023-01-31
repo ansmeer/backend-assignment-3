@@ -19,5 +19,5 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
     @Modifying
     @Query(value = "insert into movie_character (movie_id, character_id) values (?1, ?2) on conflict do nothing",
             nativeQuery = true)
-    void updateCharacters(int movieId, int characterId);
+    void updateCharacter(int movieId, int characterId);
 }

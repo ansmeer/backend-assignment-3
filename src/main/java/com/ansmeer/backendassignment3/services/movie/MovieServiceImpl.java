@@ -75,7 +75,7 @@ public class MovieServiceImpl implements MovieService {
         if (!repository.existsById(movieId)) throw new ElementNotFoundException(movieId, "movie");
         for (int character : characters) {
             if (!characterRepository.existsById(character)) throw new ElementNotFoundException(character, "character");
-            repository.updateCharacters(movieId, character);
+            repository.updateCharacter(movieId, character);
         }
     }
 }
