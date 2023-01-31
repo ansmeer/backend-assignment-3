@@ -2,6 +2,7 @@ package com.ansmeer.backendassignment3.controllers;
 
 import com.ansmeer.backendassignment3.mappers.MovieMapper;
 import com.ansmeer.backendassignment3.models.Movie;
+import com.ansmeer.backendassignment3.models.dtos.movie.MovieGetCharactersDTO;
 import com.ansmeer.backendassignment3.models.dtos.movie.MovieGetDTO;
 import com.ansmeer.backendassignment3.models.dtos.movie.MoviePostDTO;
 import com.ansmeer.backendassignment3.models.dtos.movie.MoviePutDTO;
@@ -41,10 +42,12 @@ public class MovieController {
     }
 
     @GetMapping("/{id}/characters")
-    public ResponseEntity getCharacters(@PathVariable int id) {
-        // TODO
-        Movie movie = movieService.findById(id);
-        return ResponseEntity.ok(movie.getCharacters());
+    public ResponseEntity<MovieGetCharactersDTO> getCharacters(@PathVariable int id) {
+        return ResponseEntity.ok(
+                movieMapper.movieToMovieGetCharactersDto(
+                        movieService.findById(id)
+                )
+        );
     }
 
     @PostMapping
