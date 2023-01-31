@@ -62,10 +62,6 @@ public class CharacterController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable int id) {
-        //TODO: change id check
-        if (!characterService.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
         characterService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
