@@ -63,10 +63,10 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     @Transactional
-    public int updateFranchise(int movieId, int franchiseId) {
+    public void updateFranchise(int movieId, int franchiseId) {
         if (!repository.existsById(movieId)) throw new ElementNotFoundException(movieId, "movie");
         if (!franchiseRepository.existsById(franchiseId)) throw new ElementNotFoundException(franchiseId, "franchise");
-        return repository.updateFranchise(movieId, franchiseId);
+        repository.updateFranchise(movieId, franchiseId);
     }
 
     @Override
