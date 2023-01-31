@@ -5,6 +5,7 @@ import com.ansmeer.backendassignment3.models.Franchise;
 import com.ansmeer.backendassignment3.repositories.FranchiseRepository;
 import com.ansmeer.backendassignment3.repositories.MovieRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -59,5 +60,16 @@ public class FranchiseServiceImpl implements FranchiseService {
     @Override
     public boolean existsById(int id) {
         return repository.existsById(id);
+    }
+
+
+    @Override
+    @Transactional
+    public void updateMovies(int franchiseId, int[] movies) {
+        if (!repository.existsById(franchiseId)) throw new ElementNotFoundException(franchiseId, "franchise");
+        for (int movie : movies) {
+            if (!movieRepository.existsById(movie)) throw new ElementNotFoundException(movie, "movie");
+            movieRepository.updateFranchise(movie, franchiseId);
+        }
     }
 }

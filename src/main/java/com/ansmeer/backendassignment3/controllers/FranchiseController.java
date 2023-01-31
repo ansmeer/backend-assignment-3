@@ -74,9 +74,9 @@ public class FranchiseController {
     }
 
     @PutMapping("/{id}/movies")
-    public ResponseEntity updateMovies(@PathVariable int id, @RequestBody int[] movies) {
-        // TODO fix with DTOs
-        return null;
+    public ResponseEntity<Object> updateMovies(@PathVariable int id, @RequestBody int[] movies) {
+        franchiseService.updateMovies(id, movies);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
