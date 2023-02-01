@@ -1,12 +1,14 @@
-FROM eclipse-temurin:17-alpine AS maven
+FROM maven:3.8.7-amazoncorretto-17 AS maven
 WORKDIR /app
 COPY . .
-RUN maven clean package
+RUN mvn clean package
 
-FROM eclipse-temurin:17-alpine AS runtime
+FROM amazoncorretto:17 AS runtime
 WORKDIR /app
+
 ENV PORT 8080
 ENV SPRING_PROFILE production
+
 ARG JAR_FILE=/app/target/*.jar
 COPY --from=maven ${JAR_FILE} /app/app.jar
 
