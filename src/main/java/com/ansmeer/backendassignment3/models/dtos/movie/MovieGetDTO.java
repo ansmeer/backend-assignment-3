@@ -3,6 +3,8 @@ package com.ansmeer.backendassignment3.models.dtos.movie;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Set;
+
 /**
  * This class is a DTO to represent the Movie entity, for example in get endpoints.
  */
@@ -17,4 +19,5 @@ public class MovieGetDTO {
     private String pictureUrl;
     private String trailerUrl;
     private int franchise;
+    private Set<Integer> characters;
 }
