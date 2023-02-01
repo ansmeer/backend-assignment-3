@@ -59,7 +59,7 @@ public class MovieController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Get a movie by their id")
+    @Operation(summary = "Get a movie by its id")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
@@ -81,7 +81,7 @@ public class MovieController {
     }
 
     @GetMapping("/{id}/characters")
-    @Operation(summary = "Get a characters in a movie")
+    @Operation(summary = "Get all characters in a movie")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
