@@ -20,6 +20,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
+/**
+ * Handles all api requests related to characters
+ * under the base uri "api/v1/characters".
+ */
 @RestController
 @RequestMapping(path = "api/v1/characters")
 public class CharacterController {
