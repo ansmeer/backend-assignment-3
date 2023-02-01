@@ -2,18 +2,20 @@ package com.ansmeer.backendassignment3.controllers;
 
 import com.ansmeer.backendassignment3.mappers.CharacterMapper;
 import com.ansmeer.backendassignment3.mappers.FranchiseMapper;
+import com.ansmeer.backendassignment3.mappers.MovieMapper;
 import com.ansmeer.backendassignment3.models.Franchise;
 import com.ansmeer.backendassignment3.models.dtos.character.CharacterGetSummaryDTO;
 import com.ansmeer.backendassignment3.models.dtos.franchise.FranchiseGetDTO;
-import com.ansmeer.backendassignment3.models.dtos.franchise.FranchiseGetMoviesDTO;
 import com.ansmeer.backendassignment3.models.dtos.franchise.FranchisePostDTO;
 import com.ansmeer.backendassignment3.models.dtos.franchise.FranchisePutDTO;
+import com.ansmeer.backendassignment3.models.dtos.movie.MovieGetSummaryDTO;
 import com.ansmeer.backendassignment3.services.franchise.FranchiseService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(path = "api/v1/franchises")
@@ -22,13 +24,16 @@ public class FranchiseController {
     private final FranchiseService franchiseService;
     private final FranchiseMapper franchiseMapper;
     private final CharacterMapper characterMapper;
+    private final MovieMapper movieMapper;
 
     public FranchiseController(FranchiseService franchiseService,
                                FranchiseMapper franchiseMapper,
-                               CharacterMapper characterMapper) {
+                               CharacterMapper characterMapper,
+                               MovieMapper movieMapper) {
         this.franchiseService = franchiseService;
         this.franchiseMapper = franchiseMapper;
         this.characterMapper = characterMapper;
+        this.movieMapper = movieMapper;
     }
 
     @GetMapping("/{id}")
@@ -48,12 +53,11 @@ public class FranchiseController {
     }
 
     @GetMapping("/{id}/movies")
-    public ResponseEntity<FranchiseGetMoviesDTO> getMovies(@PathVariable int id) {
+    public ResponseEntity<Set<MovieGetSummaryDTO>> getMovies(@PathVariable int id) {
         return ResponseEntity.ok(
-                franchiseMapper.franchiseToFranchiseGetMoviesDto(
-                        franchiseService.findById(id)
-                )
-        );
+                movieMapper.movieToMovieGetSummaryDto(
+                        franchiseService.findById(id).getMovies()
+                ));
     }
 
     @GetMapping("/{id}/characters")
