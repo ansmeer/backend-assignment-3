@@ -2,17 +2,26 @@ package com.ansmeer.backendassignment3.services.movie;
 
 import com.ansmeer.backendassignment3.exceptions.ElementNotFoundException;
 import com.ansmeer.backendassignment3.models.Movie;
+import com.ansmeer.backendassignment3.repositories.CharacterRepository;
+import com.ansmeer.backendassignment3.repositories.FranchiseRepository;
 import com.ansmeer.backendassignment3.repositories.MovieRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class MovieServiceImpl implements MovieService {
     private final MovieRepository repository;
+    private final FranchiseRepository franchiseRepository;
+    private final CharacterRepository characterRepository;
 
-    public MovieServiceImpl(MovieRepository repository) {
+    public MovieServiceImpl(MovieRepository repository,
+                            FranchiseRepository franchiseRepository,
+                            CharacterRepository characterRepository) {
         this.repository = repository;
+        this.franchiseRepository = franchiseRepository;
+        this.characterRepository = characterRepository;
     }
 
     @Override
@@ -32,26 +41,36 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Movie update(Movie movie) {
-        return repository.save(movie);
+    public void update(Movie movie) {
+        repository.save(movie);
     }
 
     @Override
-    public int deleteById(Integer id) {
-        if (!repository.existsById(id)) {
-            return 0;
-        }
+    public void deleteById(Integer id) {
+        if (!repository.existsById(id)) throw new ElementNotFoundException(id, "movie");
         repository.deleteById(id);
-        return 1;
     }
 
     @Override
-    public int delete(Movie movie) {
-        return deleteById(movie.getId());
+    public void delete(Movie movie) {
+        deleteById(movie.getId());
     }
 
     @Override
-    public boolean existsById(int id) {
-        return repository.existsById(id);
+    @Transactional
+    public void updateFranchise(int movieId, int franchiseId) {
+        if (!repository.existsById(movieId)) throw new ElementNotFoundException(movieId, "movie");
+        if (!franchiseRepository.existsById(franchiseId)) throw new ElementNotFoundException(franchiseId, "franchise");
+        repository.updateFranchise(movieId, franchiseId);
+    }
+
+    @Override
+    @Transactional
+    public void updateCharacters(int movieId, int[] characters) {
+        if (!repository.existsById(movieId)) throw new ElementNotFoundException(movieId, "movie");
+        for (int character : characters) {
+            if (!characterRepository.existsById(character)) throw new ElementNotFoundException(character, "character");
+            repository.updateCharacter(movieId, character);
+        }
     }
 }

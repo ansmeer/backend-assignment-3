@@ -9,10 +9,10 @@ public interface CrudService<T, ID> {
 
     T add(T entity);
 
-    T update(T entity);
+    void update(T entity);
 
-    int deleteById(ID id);
+    void deleteById(ID id);
 
-    int delete(T entity);
+    void delete(T entity);
 
 }

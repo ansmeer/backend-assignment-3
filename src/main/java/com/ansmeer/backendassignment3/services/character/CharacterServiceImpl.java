@@ -23,12 +23,6 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
-    public boolean existsById(int id) {
-        return repository.existsById(id);
-    }
-
-
-    @Override
     public List<Character> findAll() {
         return repository.findAll();
     }
@@ -39,23 +33,20 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
-    public Character update(Character character) {
-        return repository.save(character);
+    public void update(Character character) {
+        repository.save(character);
     }
 
     @Transactional
     @Override
-    public int deleteById(Integer id) {
-        if (!repository.existsById(id)) {
-            return 0;
-        }
+    public void deleteById(Integer id) {
+        if (!repository.existsById(id)) throw new ElementNotFoundException(id, "character");
         repository.deleteMovieCharacterEntries(id);
         repository.deleteById(id);
-        return 1;
     }
 
     @Override
-    public int delete(Character character) {
-        return deleteById(character.getId());
+    public void delete(Character character) {
+        deleteById(character.getId());
     }
 }
