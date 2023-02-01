@@ -45,12 +45,10 @@ public class MovieController {
     @GetMapping
     @Operation(summary = "Get all movies")
     @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Success",
+            @ApiResponse(responseCode = "200", description = "Success",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            array = @ArraySchema(schema = @Schema(implementation = MovieGetDTO.class)))
-            )})
+                            array = @ArraySchema(schema = @Schema(implementation = MovieGetDTO.class))))
+    })
     public ResponseEntity<List<MovieGetDTO>> getAll() {
         return ResponseEntity.ok(
                 movieMapper.movieToMovieGetDto(
@@ -61,17 +59,10 @@ public class MovieController {
     @GetMapping("/{id}")
     @Operation(summary = "Get a movie by its id")
     @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Success",
+            @ApiResponse(responseCode = "200", description = "Success",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = MovieGetDTO.class))
-            ),
-            @ApiResponse(
-                    responseCode = "404",
-                    description = "Movie not found",
-                    content = @Content
-            )
+                            schema = @Schema(implementation = MovieGetDTO.class))),
+            @ApiResponse(responseCode = "404", description = "Movie not found", content = @Content)
     })
     public ResponseEntity<MovieGetDTO> getById(@PathVariable int id) {
         return ResponseEntity.ok(
@@ -83,17 +74,11 @@ public class MovieController {
     @GetMapping("/{id}/characters")
     @Operation(summary = "Get all characters in a movie")
     @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Success",
+            @ApiResponse(responseCode = "200", description = "Success",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                             array = @ArraySchema(schema = @Schema(implementation = CharacterGetSummaryDTO.class)))
             ),
-            @ApiResponse(
-                    responseCode = "404",
-                    description = "Movie not found",
-                    content = @Content
-            )
+            @ApiResponse(responseCode = "404", description = "Movie not found", content = @Content)
     })
     public ResponseEntity<Set<CharacterGetSummaryDTO>> getCharacters(@PathVariable int id) {
         return ResponseEntity.ok(
@@ -105,10 +90,7 @@ public class MovieController {
     @PostMapping
     @Operation(summary = "Add a movie")
     @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "201",
-                    description = "Created",
-                    content = @Content)
+            @ApiResponse(responseCode = "201", description = "Created", content = @Content)
     })
     public ResponseEntity<Object> add(@RequestBody MoviePostDTO movie) throws URISyntaxException {
         Movie newMovie = movieService.add(
@@ -120,21 +102,9 @@ public class MovieController {
     @PutMapping("/{id}")
     @Operation(summary = "Update a movie")
     @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "204",
-                    description = "Movie updated",
-                    content = @Content
-            ),
-            @ApiResponse(
-                    responseCode = "400",
-                    description = "Bad request, URI does not match request body",
-                    content = @Content
-            ),
-            @ApiResponse(
-                    responseCode = "404",
-                    description = "Movie not found",
-                    content = @Content
-            ),
+            @ApiResponse(responseCode = "204", description = "Movie updated", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Bad request, URI does not match request body", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Movie not found", content = @Content),
     })
     public ResponseEntity<Object> update(@PathVariable int id, @RequestBody MoviePutDTO movie) {
         if (id != movie.getId()) {
@@ -149,16 +119,8 @@ public class MovieController {
     @PutMapping("/{id}/characters")
     @Operation(summary = "Update a movie's characters")
     @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "204",
-                    description = "Characters updated",
-                    content = @Content
-            ),
-            @ApiResponse(
-                    responseCode = "404",
-                    description = "Movie or character(s) not found",
-                    content = @Content
-            ),
+            @ApiResponse(responseCode = "204", description = "Characters updated", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Movie or character(s) not found", content = @Content),
     })
     public ResponseEntity<Object> updateCharacters(@PathVariable int id, @RequestBody int[] characters) {
         movieService.updateCharacters(id, characters);
@@ -168,16 +130,8 @@ public class MovieController {
     @PutMapping("/{id}/franchise")
     @Operation(summary = "Update a movie's franchise")
     @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "204",
-                    description = "Movie updated",
-                    content = @Content
-            ),
-            @ApiResponse(
-                    responseCode = "404",
-                    description = "Movie or franchise not found",
-                    content = @Content
-            ),
+            @ApiResponse(responseCode = "204", description = "Movie updated", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Movie or franchise not found", content = @Content),
     })
     public ResponseEntity<Object> updateFranchise(@PathVariable int id, @RequestBody int franchise) {
         movieService.updateFranchise(id, franchise);
@@ -187,16 +141,8 @@ public class MovieController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a movie by its id")
     @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "204",
-                    description = "Movie deleted",
-                    content = @Content
-            ),
-            @ApiResponse(
-                    responseCode = "404",
-                    description = "Movie not found",
-                    content = @Content
-            ),
+            @ApiResponse(responseCode = "204", description = "Movie deleted", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Movie not found", content = @Content),
     })
     public ResponseEntity<Object> delete(@PathVariable int id) {
         movieService.deleteById(id);

@@ -49,17 +49,10 @@ public class FranchiseController {
     @GetMapping("/{id}")
     @Operation(summary = "Get a franchise by its id")
     @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Success",
+            @ApiResponse(responseCode = "200", description = "Success",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = FranchiseGetDTO.class))
-            ),
-            @ApiResponse(
-                    responseCode = "404",
-                    description = "Franchise not found",
-                    content = @Content
-            )
+                            schema = @Schema(implementation = FranchiseGetDTO.class))),
+            @ApiResponse(responseCode = "404", description = "Franchise not found", content = @Content)
     })
     public ResponseEntity<FranchiseGetDTO> getById(@PathVariable Integer id) {
         return ResponseEntity.ok(
@@ -71,12 +64,10 @@ public class FranchiseController {
     @GetMapping
     @Operation(summary = "Get all franchises")
     @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Success",
+            @ApiResponse(responseCode = "200", description = "Success",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            array = @ArraySchema(schema = @Schema(implementation = FranchiseGetDTO.class)))
-            )})
+                            array = @ArraySchema(schema = @Schema(implementation = FranchiseGetDTO.class))))
+    })
     public ResponseEntity<List<FranchiseGetDTO>> getAll() {
         return ResponseEntity.ok(
                 franchiseMapper.franchiseToFranchiseGetDto(
@@ -87,17 +78,9 @@ public class FranchiseController {
     @GetMapping("/{id}/movies")
     @Operation(summary = "Get all movies in a franchise")
     @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Success",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            array = @ArraySchema(schema = @Schema(implementation = MovieGetSummaryDTO.class)))
-            ),
-            @ApiResponse(
-                    responseCode = "404",
-                    description = "Franchise not found",
-                    content = @Content
-            )
+            @ApiResponse(responseCode = "200", description = "Success", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    array = @ArraySchema(schema = @Schema(implementation = MovieGetSummaryDTO.class)))),
+            @ApiResponse(responseCode = "404", description = "Franchise not found", content = @Content)
     })
     public ResponseEntity<Set<MovieGetSummaryDTO>> getMovies(@PathVariable int id) {
         return ResponseEntity.ok(
@@ -109,17 +92,10 @@ public class FranchiseController {
     @GetMapping("/{id}/characters")
     @Operation(summary = "Get all characters in a franchise")
     @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Success",
+            @ApiResponse(responseCode = "200", description = "Success",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            array = @ArraySchema(schema = @Schema(implementation = CharacterGetSummaryDTO.class)))
-            ),
-            @ApiResponse(
-                    responseCode = "404",
-                    description = "Franchise not found",
-                    content = @Content
-            )
+                            array = @ArraySchema(schema = @Schema(implementation = CharacterGetSummaryDTO.class)))),
+            @ApiResponse(responseCode = "404", description = "Franchise not found", content = @Content)
     })
     public ResponseEntity<List<CharacterGetSummaryDTO>> getCharacters(@PathVariable int id) {
         return ResponseEntity.ok(
@@ -131,10 +107,7 @@ public class FranchiseController {
     @PostMapping
     @Operation(summary = "Add a franchise")
     @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "201",
-                    description = "Created",
-                    content = @Content)
+            @ApiResponse(responseCode = "201", description = "Created", content = @Content)
     })
     public ResponseEntity<Object> add(@RequestBody FranchisePostDTO franchise) {
         Franchise newFranchise = franchiseService.add(
@@ -146,21 +119,9 @@ public class FranchiseController {
     @PutMapping("/{id}")
     @Operation(summary = "Update a franchise")
     @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "204",
-                    description = "Franchise updated",
-                    content = @Content
-            ),
-            @ApiResponse(
-                    responseCode = "400",
-                    description = "Bad request, URI does not match request body",
-                    content = @Content
-            ),
-            @ApiResponse(
-                    responseCode = "404",
-                    description = "Franchise not found",
-                    content = @Content
-            ),
+            @ApiResponse(responseCode = "204", description = "Franchise updated", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Bad request, URI does not match request body", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Franchise not found", content = @Content),
     })
     public ResponseEntity<Object> update(@RequestBody FranchisePutDTO franchise, @PathVariable int id) {
         if (franchise.getId() != id)
@@ -173,16 +134,8 @@ public class FranchiseController {
     @PutMapping("/{id}/movies")
     @Operation(summary = "Update a franchise's movies")
     @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "204",
-                    description = "Franchise updated",
-                    content = @Content
-            ),
-            @ApiResponse(
-                    responseCode = "404",
-                    description = "Franchise or movie(s) not found",
-                    content = @Content
-            ),
+            @ApiResponse(responseCode = "204", description = "Franchise updated", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Franchise or movie(s) not found", content = @Content),
     })
     public ResponseEntity<Object> updateMovies(@PathVariable int id, @RequestBody int[] movies) {
         franchiseService.updateMovies(id, movies);
@@ -192,16 +145,8 @@ public class FranchiseController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a franchise by its id")
     @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "204",
-                    description = "Franchise deleted",
-                    content = @Content
-            ),
-            @ApiResponse(
-                    responseCode = "404",
-                    description = "Franchise not found",
-                    content = @Content
-            ),
+            @ApiResponse(responseCode = "204", description = "Franchise deleted", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Franchise not found", content = @Content),
     })
     public ResponseEntity<Object> delete(@PathVariable int id) {
         franchiseService.deleteById(id);
