@@ -10,10 +10,22 @@ import java.util.List;
 
 @Repository
 public interface CharacterRepository extends JpaRepository<Character, Integer> {
+
+    /**
+     * Deletes a character in a movie.
+     *
+     * @param id the id of the character to delete
+     */
     @Modifying
     @Query(value = "delete from movie_character where character_id = ?1", nativeQuery = true)
     void deleteMovieCharacterEntries(int id);
 
+    /**
+     * Returns a list of Character entities that belong to the same franchise by its id.
+     *
+     * @param id the id of the franchise
+     * @return the list of Character entities
+     */
     @Query(value = "SELECT character.* " +
             "FROM (SELECT movie_character.character_id " +
             "FROM movie " +

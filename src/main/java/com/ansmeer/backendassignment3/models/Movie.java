@@ -6,6 +6,9 @@ import lombok.Setter;
 
 import java.util.Set;
 
+/**
+ * The Movie class represents a movie in the movie database including its relations to other classes.
+ */
 @Entity
 @Getter
 @Setter

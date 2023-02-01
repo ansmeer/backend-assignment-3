@@ -13,14 +13,44 @@ import java.util.Set;
 
 @Mapper(componentModel = "spring")
 public interface MovieMapper {
+    /**
+     * Converts a Movie entity into a MovieGetDTO.
+     *
+     * @param movie the Movie entity
+     * @return the MovieGetDTO
+     */
     @Mapping(target = "franchise", source = "franchise.id")
     MovieGetDTO movieToMovieGetDto(Movie movie);
 
+    /**
+     * Converts a list of Movie entities into a list of MovieGetDTOs.
+     *
+     * @param movies the list of Movie entities
+     * @return the list of MovieGetDTOs
+     */
     List<MovieGetDTO> movieToMovieGetDto(List<Movie> movies);
 
+    /**
+     * Converts a set of Movie entities into a set of MovieGetSummaryDTOs.
+     *
+     * @param movie the set of Movie entities
+     * @return the set of MovieGetSummaryDTOs
+     */
     Set<MovieGetSummaryDTO> movieToMovieGetSummaryDto(Set<Movie> movie);
 
+    /**
+     * Converts a MoviePostDTO into a Movie entity.
+     *
+     * @param movie the MoviePostDTO
+     * @return the Movie entity
+     */
     Movie moviePostDtoToMovie(MoviePostDTO movie);
 
+    /**
+     * Converts a MoviePutDTO into a Movie entity.
+     *
+     * @param movie the MoviePutDTO
+     * @return the Movie entity
+     */
     Movie moviePutDtoToMovie(MoviePutDTO movie);
 }

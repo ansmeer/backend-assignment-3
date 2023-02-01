@@ -10,6 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * This class describes an implementation of the movie service interface
+ * and interacts with different repositories.
+ */
 @Service
 public class MovieServiceImpl implements MovieService {
     private final MovieRepository repository;
