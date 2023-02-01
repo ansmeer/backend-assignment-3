@@ -43,7 +43,7 @@ public class MovieController {
     }
 
     @GetMapping
-    @Operation(summary = "Get all movies")
+    @Operation(summary = "Get all movies", tags = {"Movie", "Get"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
@@ -57,7 +57,7 @@ public class MovieController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Get a movie by its id")
+    @Operation(summary = "Get a movie by its id", tags = {"Movie", "Get"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
@@ -72,7 +72,7 @@ public class MovieController {
     }
 
     @GetMapping("/{id}/characters")
-    @Operation(summary = "Get all characters in a movie")
+    @Operation(summary = "Get all characters in a movie", tags = {"Movie", "Character", "Get"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
@@ -88,7 +88,7 @@ public class MovieController {
     }
 
     @PostMapping
-    @Operation(summary = "Add a movie")
+    @Operation(summary = "Add a movie", tags = {"Movie", "Post"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Created", content = @Content)
     })
@@ -100,7 +100,7 @@ public class MovieController {
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Update a movie")
+    @Operation(summary = "Update a movie", tags = {"Movie", "Put"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Movie updated", content = @Content),
             @ApiResponse(responseCode = "400", description = "Bad request, URI does not match request body", content = @Content),
@@ -117,7 +117,7 @@ public class MovieController {
     }
 
     @PutMapping("/{id}/characters")
-    @Operation(summary = "Update a movie's characters")
+    @Operation(summary = "Update a movie's characters", tags = {"Movie", "Character", "Put"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Characters updated", content = @Content),
             @ApiResponse(responseCode = "404", description = "Movie or character(s) not found", content = @Content),
@@ -128,7 +128,7 @@ public class MovieController {
     }
 
     @PutMapping("/{id}/franchise")
-    @Operation(summary = "Update a movie's franchise")
+    @Operation(summary = "Update a movie's franchise", tags = {"Movie", "Franchise", "Put"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Movie updated", content = @Content),
             @ApiResponse(responseCode = "404", description = "Movie or franchise not found", content = @Content),
@@ -139,7 +139,7 @@ public class MovieController {
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete a movie by its id")
+    @Operation(summary = "Delete a movie by its id", tags = {"Movie", "Delete"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Movie deleted", content = @Content),
             @ApiResponse(responseCode = "404", description = "Movie not found", content = @Content),

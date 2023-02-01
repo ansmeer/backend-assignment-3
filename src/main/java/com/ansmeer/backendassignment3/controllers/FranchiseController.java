@@ -47,7 +47,7 @@ public class FranchiseController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Get a franchise by its id")
+    @Operation(summary = "Get a franchise by its id", tags = {"Franchise", "Get"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
@@ -62,7 +62,7 @@ public class FranchiseController {
     }
 
     @GetMapping
-    @Operation(summary = "Get all franchises")
+    @Operation(summary = "Get all franchises", tags = {"Franchise", "Get"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
@@ -76,7 +76,7 @@ public class FranchiseController {
     }
 
     @GetMapping("/{id}/movies")
-    @Operation(summary = "Get all movies in a franchise")
+    @Operation(summary = "Get all movies in a franchise", tags = {"Franchise", "Movie", "Get"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                     array = @ArraySchema(schema = @Schema(implementation = MovieGetSummaryDTO.class)))),
@@ -90,7 +90,7 @@ public class FranchiseController {
     }
 
     @GetMapping("/{id}/characters")
-    @Operation(summary = "Get all characters in a franchise")
+    @Operation(summary = "Get all characters in a franchise", tags = {"Franchise", "Character", "Get"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
@@ -105,7 +105,7 @@ public class FranchiseController {
     }
 
     @PostMapping
-    @Operation(summary = "Add a franchise")
+    @Operation(summary = "Add a franchise", tags = {"Franchise", "Post"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Created", content = @Content)
     })
@@ -117,7 +117,7 @@ public class FranchiseController {
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Update a franchise")
+    @Operation(summary = "Update a franchise", tags = {"Franchise", "Put"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Franchise updated", content = @Content),
             @ApiResponse(responseCode = "400", description = "Bad request, URI does not match request body", content = @Content),
@@ -132,7 +132,7 @@ public class FranchiseController {
     }
 
     @PutMapping("/{id}/movies")
-    @Operation(summary = "Update a franchise's movies")
+    @Operation(summary = "Update a franchise's movies", tags = {"Franchise", "Movie", "Put"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Franchise updated", content = @Content),
             @ApiResponse(responseCode = "404", description = "Franchise or movie(s) not found", content = @Content),
@@ -143,7 +143,7 @@ public class FranchiseController {
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete a franchise by its id")
+    @Operation(summary = "Delete a franchise by its id", tags = {"Franchise", "Delete"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Franchise deleted", content = @Content),
             @ApiResponse(responseCode = "404", description = "Franchise not found", content = @Content),
