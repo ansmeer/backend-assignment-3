@@ -6,6 +6,9 @@ import lombok.Setter;
 
 import java.util.Set;
 
+/**
+ * The Franchise class represents a franchise in the movie database including its relations to other classes.
+ */
 @Entity
 @Getter
 @Setter
