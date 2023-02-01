@@ -36,7 +36,7 @@ public class CharacterController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Get a character by their ID")
+    @Operation(summary = "Get a character by their ID", tags = {"Character", "Get"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
@@ -50,7 +50,7 @@ public class CharacterController {
     }
 
     @GetMapping
-    @Operation(summary = "Get all characters")
+    @Operation(summary = "Get all characters", tags = {"Character", "Get"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success",
                     content = {@Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
@@ -64,7 +64,7 @@ public class CharacterController {
     }
 
     @PostMapping
-    @Operation(summary = "Add a character")
+    @Operation(summary = "Add a character", tags = {"Character", "Post"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Created", content = @Content)
     })
@@ -76,7 +76,7 @@ public class CharacterController {
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Update a character")
+    @Operation(summary = "Update a character", tags = {"Character", "Put"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Character updated", content = @Content),
             @ApiResponse(responseCode = "400", description = "Bad request, URI does not match request body", content = @Content),
@@ -93,7 +93,7 @@ public class CharacterController {
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete a character by its id")
+    @Operation(summary = "Delete a character by its id", tags = {"Character", "Delete"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Character deleted", content = @Content),
             @ApiResponse(responseCode = "404", description = "Character not found", content = @Content)
