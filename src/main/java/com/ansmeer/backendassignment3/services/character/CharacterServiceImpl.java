@@ -48,9 +48,4 @@ public class CharacterServiceImpl implements CharacterService {
         repository.deleteMovieCharacterEntries(id);
         repository.deleteById(id);
     }
-
-    @Override
-    public void delete(Character character) {
-        deleteById(character.getId());
-    }
 }

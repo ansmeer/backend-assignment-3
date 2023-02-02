@@ -45,11 +45,4 @@ public interface CrudService<T, ID> {
      * @param id the ID of the entity to delete
      */
     void deleteById(ID id);
-
-    /**
-     * Deletes an entity from the repository.
-     *
-     * @param entity the entity to delete
-     */
-    void delete(T entity);
 }

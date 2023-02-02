@@ -63,11 +63,6 @@ public class FranchiseServiceImpl implements FranchiseService {
     }
 
     @Override
-    public void delete(Franchise franchise) {
-        deleteById(franchise.getId());
-    }
-
-    @Override
     @Transactional
     public void updateMovies(int franchiseId, int[] movies) {
         if (!repository.existsById(franchiseId)) throw new ElementNotFoundException(franchiseId, "franchise");
