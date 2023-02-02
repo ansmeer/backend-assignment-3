@@ -72,9 +72,10 @@ public class MovieServiceImpl implements MovieService {
     @Transactional
     public void updateCharacters(int movieId, int[] characters) {
         if (!repository.existsById(movieId)) throw new ElementNotFoundException(movieId, "movie");
+        repository.deleteAllCharactersFromMovie(movieId);
         for (int character : characters) {
             if (!characterRepository.existsById(character)) throw new ElementNotFoundException(character, "character");
-            repository.updateCharacter(movieId, character);
+            repository.addCharacterToMovie(movieId, character);
         }
     }
 }
