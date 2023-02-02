@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Encapsulates access to movies stored in the MovieDb.
+ */
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
     /**

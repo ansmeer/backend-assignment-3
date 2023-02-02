@@ -42,20 +42,6 @@ public class MovieController {
         this.characterMapper = characterMapper;
     }
 
-    @GetMapping
-    @Operation(summary = "Get all movies", tags = {"Movie", "Get"})
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Success",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            array = @ArraySchema(schema = @Schema(implementation = MovieGetDTO.class))))
-    })
-    public ResponseEntity<List<MovieGetDTO>> getAll() {
-        return ResponseEntity.ok(
-                movieMapper.movieToMovieGetDto(
-                        movieService.findAll())
-        );
-    }
-
     @GetMapping("/{id}")
     @Operation(summary = "Get a movie by its id", tags = {"Movie", "Get"})
     @ApiResponses(value = {
@@ -69,6 +55,20 @@ public class MovieController {
                 movieMapper.movieToMovieGetDto(
                         movieService.findById(id)
                 ));
+    }
+
+    @GetMapping
+    @Operation(summary = "Get all movies", tags = {"Movie", "Get"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success",
+                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            array = @ArraySchema(schema = @Schema(implementation = MovieGetDTO.class))))
+    })
+    public ResponseEntity<List<MovieGetDTO>> getAll() {
+        return ResponseEntity.ok(
+                movieMapper.movieToMovieGetDto(
+                        movieService.findAll())
+        );
     }
 
     @GetMapping("/{id}/characters")

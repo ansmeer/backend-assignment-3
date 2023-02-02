@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * This class describes an implementation of the character service interface
+ * and interacts with different repositories.
+ */
 @Service
 public class CharacterServiceImpl implements CharacterService {
     private final CharacterRepository repository;
@@ -43,10 +47,5 @@ public class CharacterServiceImpl implements CharacterService {
         if (!repository.existsById(id)) throw new ElementNotFoundException(id, "character");
         repository.deleteMovieCharacterEntries(id);
         repository.deleteById(id);
-    }
-
-    @Override
-    public void delete(Character character) {
-        deleteById(character.getId());
     }
 }

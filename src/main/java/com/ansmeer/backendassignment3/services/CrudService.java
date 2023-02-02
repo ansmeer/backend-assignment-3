@@ -2,6 +2,12 @@ package com.ansmeer.backendassignment3.services;
 
 import java.util.List;
 
+/**
+ * Interface to describe generic CRUD operations performed by services.
+ *
+ * @param <T>  generic entity type to be specified by the implementation
+ * @param <ID> generic entity id type to be specified by the implementation
+ */
 public interface CrudService<T, ID> {
     /**
      * Returns an entity of type T from the repository by its ID.
@@ -14,7 +20,7 @@ public interface CrudService<T, ID> {
     /**
      * Returns a list with all entities of type T from the repository.
      *
-     * @return the entitites
+     * @return the entities
      */
     List<T> findAll();
 
@@ -39,11 +45,4 @@ public interface CrudService<T, ID> {
      * @param id the ID of the entity to delete
      */
     void deleteById(ID id);
-
-    /**
-     * Deletes an entity from the repository.
-     *
-     * @param entity the entity to delete
-     */
-    void delete(T entity);
 }

@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Encapsulates access to characters stored in the MovieDb.
+ */
 @Repository
 public interface CharacterRepository extends JpaRepository<Character, Integer> {
 

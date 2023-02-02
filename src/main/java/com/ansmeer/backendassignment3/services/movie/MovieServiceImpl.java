@@ -57,11 +57,6 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public void delete(Movie movie) {
-        deleteById(movie.getId());
-    }
-
-    @Override
     @Transactional
     public void updateFranchise(int movieId, int franchiseId) {
         Movie movie = repository.findById(movieId).orElseThrow(() -> new ElementNotFoundException(movieId, "movie"));

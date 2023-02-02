@@ -11,6 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * This class describes an implementation of the franchise service interface
+ * and interacts with different repositories.
+ */
 @Service
 public class FranchiseServiceImpl implements FranchiseService {
 
@@ -56,11 +60,6 @@ public class FranchiseServiceImpl implements FranchiseService {
             movieRepository.save(movie);
         });
         repository.deleteById(id);
-    }
-
-    @Override
-    public void delete(Franchise franchise) {
-        deleteById(franchise.getId());
     }
 
     @Override
