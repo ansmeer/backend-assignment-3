@@ -1,6 +1,7 @@
 package com.ansmeer.backendassignment3.services.movie;
 
 import com.ansmeer.backendassignment3.exceptions.ElementNotFoundException;
+import com.ansmeer.backendassignment3.models.Franchise;
 import com.ansmeer.backendassignment3.models.Movie;
 import com.ansmeer.backendassignment3.repositories.CharacterRepository;
 import com.ansmeer.backendassignment3.repositories.FranchiseRepository;
@@ -63,9 +64,14 @@ public class MovieServiceImpl implements MovieService {
     @Override
     @Transactional
     public void updateFranchise(int movieId, int franchiseId) {
-        if (!repository.existsById(movieId)) throw new ElementNotFoundException(movieId, "movie");
-        if (!franchiseRepository.existsById(franchiseId)) throw new ElementNotFoundException(franchiseId, "franchise");
-        repository.updateFranchise(movieId, franchiseId);
+        Movie movie = repository.findById(movieId).orElseThrow(() -> new ElementNotFoundException(movieId, "movie"));
+        if (franchiseId == 0) {
+            movie.setFranchise(null);
+        } else {
+            Franchise franchise = franchiseRepository.findById(franchiseId).orElseThrow(() -> new ElementNotFoundException(franchiseId, "franchise"));
+            movie.setFranchise(franchise);
+        }
+        repository.save(movie);
     }
 
     @Override
