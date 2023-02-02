@@ -20,7 +20,7 @@ public interface CrudService<T, ID> {
     /**
      * Returns a list with all entities of type T from the repository.
      *
-     * @return the entitites
+     * @return the entities
      */
     List<T> findAll();
 
