@@ -6,6 +6,9 @@ import com.ansmeer.backendassignment3.services.CrudService;
 
 import java.util.List;
 
+/**
+ * Describes methods to be defined in the FranchiseServiceImplementation.
+ */
 public interface FranchiseService extends CrudService<Franchise, Integer> {
     /**
      * Links one or more Movie entities to a franchise by its id.

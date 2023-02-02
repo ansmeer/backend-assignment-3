@@ -5,6 +5,9 @@ import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.License;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+/**
+ * Empty class used to keep the @OpenAPIDefinition.
+ */
 @OpenAPIDefinition(
         info = @Info(
                 title = "MovieDatabase API",

@@ -2,6 +2,12 @@ package com.ansmeer.backendassignment3.services;
 
 import java.util.List;
 
+/**
+ * Interface to describe generic CRUD operations performed by services.
+ *
+ * @param <T>  generic entity type to be specified by the implementation
+ * @param <ID> generic entity id type to be specified by the implementation
+ */
 public interface CrudService<T, ID> {
     /**
      * Returns an entity of type T from the repository by its ID.
