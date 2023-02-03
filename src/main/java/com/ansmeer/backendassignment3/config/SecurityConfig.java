@@ -18,7 +18,10 @@ public class SecurityConfig {
                 .sessionManagement().disable()
                 .csrf().disable()
                 .authorizeHttpRequests(authorize -> authorize
-                        .anyRequest().authenticated()
+//                                .requestMatchers("/api/v1/movies/**").permitAll()
+//                                .requestMatchers("/api/v1/franchises/**").permitAll()
+//                                .requestMatchers("/api/v1/characters/**").permitAll()
+                                .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer()
                 .jwt()

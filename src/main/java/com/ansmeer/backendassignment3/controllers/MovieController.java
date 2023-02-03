@@ -16,6 +16,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -42,6 +43,7 @@ public class MovieController {
         this.characterMapper = characterMapper;
     }
 
+    //    @PreAuthorize("permitAll()")
     @GetMapping("/{id}")
     @Operation(summary = "Get a movie by its id", tags = {"Movie", "Get"})
     @ApiResponses(value = {
@@ -58,6 +60,7 @@ public class MovieController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @Operation(summary = "Get all movies", tags = {"Movie", "Get"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success",
@@ -88,6 +91,7 @@ public class MovieController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Add a movie", tags = {"Movie", "Post"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Created", content = @Content)
